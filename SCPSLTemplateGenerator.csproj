@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    
+    <!-- Configuration pour .NET Tool -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>scpsl-template</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    
+    <!-- Métadonnées du package -->
+    <PackageId>SCPSLTemplateGenerator</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>TheFrenchyDev</Authors>
+    <Company>TheFrenchyDev</Company>
+    <Product>SCPSL Template Generator</Product>
+    <Description>A .NET CLI tool for quickly generating SCP:SL LabAPI plugin templates with automatic dependency management, FasterAPI integration, and complete project structure.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/TheFrenchyDev/scpsl-template-generator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TheFrenchyDev/scpsl-template-generator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>scp-sl;scpsl;labapi;plugin;template;cli;dotnet-tool;game-development;scp;secret-laboratory</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Initial release with automatic dependency management and FasterAPI integration.</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>Copyright (c) 2026 TheFrenchyDev</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+
+  <!-- Exclure le dossier src de la compilation -->
+  <ItemGroup>
+    <Compile Remove="src\**\*" />
+    <EmbeddedResource Remove="src\**\*" />
+    <None Remove="src\**\*" />
+  </ItemGroup>
+
+  <!-- Inclure les templates dans le package -->
+  <ItemGroup>
+    <Content Include="templates\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="dependencies\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

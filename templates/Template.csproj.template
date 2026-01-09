@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <OutputType>Library</OutputType>
+    <RootNamespace>{{Namespace}}</RootNamespace>
+    <AssemblyName>{{PluginName}}</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Northwood.LabAPI" Version="1.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+{{DependencyReferences}}
+  </ItemGroup>
+  
+  <PropertyGroup>
+    <LabApiPluginDir>$(AppData)\SCP Secret Laboratory\LabAPI\plugins\7777\</LabApiPluginDir>
+  </PropertyGroup>
+
+  <!-- Dependencies copy into the local dedicated server plugins dir  -->
+  <Target Name="CopyPluginToLabApi" AfterTargets="Build">
+    <MakeDir Directories="$(LabApiPluginDir)" Condition="!Exists('$(LabApiPluginDir)')" />
+
+    <Message Text="Copying $(TargetPath) ? $(LabApiPluginDir)" Importance="High" />
+
+    <Copy SourceFiles="$(TargetPath)"
+          DestinationFolder="$(LabApiPluginDir)"
+          SkipUnchangedFiles="true"
+          Retries="3"
+          RetryDelayMilliseconds="300" />
+
+    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+      <DebugSymbols Include="$(TargetDir)$(AssemblyName).pdb" Condition="Exists('$(TargetDir)$(AssemblyName).pdb')" />
+      <XmlDocs Include="$(TargetDir)$(AssemblyName).xml" Condition="Exists('$(TargetDir)$(AssemblyName).xml')" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DebugSymbols);@(XmlDocs)"
+          DestinationFolder="$(LabApiPluginDir)"
+          SkipUnchangedFiles="true"
+          Condition="'$(Configuration)' == 'Debug' AND '@(DebugSymbols);@(XmlDocs)' != ';'" />
+    
+    <Message Text="Debug build: PDB files included for debugging" Condition="'$(Configuration)' == 'Debug'" Importance="Normal" />
+    <Message Text="Release build: PDB files excluded for production" Condition="'$(Configuration)' == 'Release'" Importance="Normal" />
+  </Target>
+</Project>

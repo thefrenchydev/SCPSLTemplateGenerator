@@ -1,0 +1,22 @@
+## Build outputs
+bin/
+obj/
+nupkg/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Dependencies (copied from LABAPI_REFERENCES)
+dependencies/*.dll
+
+## Temp files
+*.tmp
+*.temp

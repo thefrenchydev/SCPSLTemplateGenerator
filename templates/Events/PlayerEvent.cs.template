@@ -1,0 +1,16 @@
+namespace {{Namespace}}.Events;
+
+using CustomEventHandler.Events;
+using LabApi.Events.Arguments.PlayerEvents;
+using LabApi.Events.Handlers;
+
+public class PlayerSpawned : IEventType
+{
+    public void Register() => PlayerEvents.Spawned += OnPlayerSpawned;
+    public void Unregister() => PlayerEvents.Spawned -= OnPlayerSpawned;
+
+    private void OnPlayerSpawned(PlayerSpawnedEventArgs ev)
+    {
+       
+    }
+}
