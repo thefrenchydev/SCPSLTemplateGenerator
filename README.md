@@ -55,8 +55,6 @@ MyPlugin/
 - .NET 8.0 SDK or later
 - Environment variable `LABAPI_REFERENCES` pointing to your SCP:SL dependencies folder
 
-The tool will guide you through setting up `LABAPI_REFERENCES` on first run if not configured.
-
 ## Environment Setup
 
 On first use, the tool will help you set up the `LABAPI_REFERENCES` environment variable, which should point to a folder containing your SCP:SL game dependencies (Assembly-CSharp.dll, UnityEngine.dll, etc.).
@@ -64,7 +62,7 @@ On first use, the tool will help you set up the `LABAPI_REFERENCES` environment 
 ## Building from Source
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/thefrenchydev/SCPSLTemplateGenerator.git
 cd SCPSLTemplateGenerator
 dotnet build -c Release
 dotnet pack -c Release
