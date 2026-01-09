@@ -3,7 +3,6 @@
 A .NET CLI tool for quickly generating SCP:SL LabAPI plugin templates with automatic dependency management.
 
 ## Features
-
 ✨ **Quick Plugin Generation** - Create a complete plugin structure with one command  
 🔧 **Automatic Dependencies** - Integrated dependency management via `LABAPI_REFERENCES`  
 📦 **LabAPI Integration** - Pre-configured with Northwood.LabAPI and CustomEventHandler  
@@ -11,21 +10,17 @@ A .NET CLI tool for quickly generating SCP:SL LabAPI plugin templates with autom
 📁 **Complete Structure** - Includes example commands, events, and config files
 
 ## Installation
-
 Install globally using .NET CLI:
-
 ```bash
 dotnet tool install --global SCPSLTemplateGenerator
 ```
 
 ## Quick Start
-
 Generate a new plugin:
 
 ```bash
 scpsl-template new MyPlugin --author "YourName" --description "My awesome plugin"
 ```
-
 ### Options
 
 - `--author` / `-a` : Plugin author name (default: "YourName")
@@ -35,7 +30,6 @@ scpsl-template new MyPlugin --author "YourName" --description "My awesome plugin
 - `--force` / `-f` : Overwrite existing files
 
 ## Generated Structure
-
 ```
 MyPlugin/
 ├── MyPlugin.sln
@@ -51,16 +45,13 @@ MyPlugin/
 ```
 
 ## Requirements
-
 - .NET 8.0 SDK or later
 - Environment variable `LABAPI_REFERENCES` pointing to your SCP:SL dependencies folder
 
 ## Environment Setup
-
 On first use, the tool will help you set up the `LABAPI_REFERENCES` environment variable, which should point to a folder containing your SCP:SL game dependencies (Assembly-CSharp.dll, UnityEngine.dll, etc.).
 
 ## Building from Source
-
 ```bash
 git clone https://github.com/thefrenchydev/SCPSLTemplateGenerator.git
 cd SCPSLTemplateGenerator
@@ -70,9 +61,7 @@ dotnet tool install --global --add-source ./nupkg SCPSLTemplateGenerator
 ```
 
 ## License
-
 MIT License - See LICENSE file for details
 
 ## Support
-
 For issues, feature requests, or contributions, please visit the [GitHub repository](https://github.com/thefrenchydev/SCPSLTemplateGenerator).
