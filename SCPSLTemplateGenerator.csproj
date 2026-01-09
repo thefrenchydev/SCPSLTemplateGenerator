@@ -41,10 +41,14 @@
     <None Remove="src\**\*" />
   </ItemGroup>
 
-  <!-- Inclure les templates dans le package -->
+  <!-- Inclure les templates et dépendances aux côtés de l'exécutable de l'outil -->
   <ItemGroup>
-    <Content Include="templates\**\*" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="dependencies\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="templates\**\*" Exclude="templates\.gitignore">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="dependencies\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 

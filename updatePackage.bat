@@ -18,8 +18,14 @@ echo [INFO] Building project...
 dotnet build -c Release
 echo [INFO] Packing project...
 dotnet pack -c Release
-echo [INFO] Uninstalling old version...
-dotnet tool uninstall --global SCPSLTemplateGenerator
+set "TOOL_ID=SCPSLTemplateGenerator"
+echo [INFO] Uninstalling old version (if present)...
+dotnet tool list --global | findstr /I " %TOOL_ID% " >nul
+if %errorlevel%==0 (
+    dotnet tool uninstall --global %TOOL_ID%
+) else (
+    echo [INFO] Tool not currently installed; skipping uninstall.
+)
 echo [INFO] Installing new version...
-dotnet tool install --global --add-source .\nupkg\ SCPSLTemplateGenerator
+dotnet tool install --global --add-source .\nupkg\ %TOOL_ID%
 echo [SUCCESS] Package updated successfully!

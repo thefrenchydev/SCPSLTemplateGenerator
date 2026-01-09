@@ -7,10 +7,21 @@
     <OutputType>Library</OutputType>
     <RootNamespace>{{Namespace}}</RootNamespace>
     <AssemblyName>{{PluginName}}</AssemblyName>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <NoWarn>NU1903</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Northwood.LabAPI" Version="1.1.4" />
+  </ItemGroup>
+
+  <!-- Force highest versions to resolve RAR conflicts -->
+  <ItemGroup>
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
