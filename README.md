@@ -77,4 +77,4 @@ MIT License - See LICENSE file for details
 
 ## Support
 
-For issues, feature requests, or contributions, please visit the [GitHub repository](https://github.com/your-repo/scpsl-template-generator).
+For issues, feature requests, or contributions, please visit the [GitHub repository](https://github.com/thefrenchydev/SCPSLTemplateGenerator).

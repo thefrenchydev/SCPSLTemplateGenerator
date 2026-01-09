@@ -20,8 +20,8 @@
     <Product>SCPSL Template Generator</Product>
     <Description>A .NET CLI tool for quickly generating SCP:SL LabAPI plugin templates with automatic dependency management, FasterAPI integration, and complete project structure.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/TheFrenchyDev/scpsl-template-generator</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/TheFrenchyDev/scpsl-template-generator</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/thefrenchydev/SCPSLTemplateGenerator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/thefrenchydev/SCPSLTemplateGenerator</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>scp-sl;scpsl;labapi;plugin;template;cli;dotnet-tool;game-development;scp;secret-laboratory</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>

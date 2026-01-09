@@ -28,8 +28,8 @@ git add .
 # Premier commit
 git commit -m "Initial commit: SCPSL Template Generator v1.0.0"
 
-# Ajouter le remote (remplace TON-USERNAME)
-git remote add origin https://github.com/TON-USERNAME/SCPSLTemplateGenerator.git
+# Ajouter le remote
+git remote add origin https://github.com/thefrenchydev/SCPSLTemplateGenerator.git
 
 # Définir la branche principale
 git branch -M main
@@ -60,7 +60,7 @@ git push -u origin main
      
      ### Installation
      ```bash
-     dotnet tool install --global --add-source https://github.com/TON-USERNAME/SCPSLTemplateGenerator/releases/download/v1.0.0 SCPSLTemplateGenerator
+     dotnet tool install --global --add-source https://github.com/thefrenchydev/SCPSLTemplateGenerator/releases/download/v1.0.0 SCPSLTemplateGenerator
      ```
      
      Or download the .nupkg file below and install locally:
@@ -97,13 +97,13 @@ Une fois la release publiée, les utilisateurs peuvent :
 
 **Option 1 : Télécharger et installer localement**
 ```bash
-# Télécharger le .nupkg depuis https://github.com/TON-USERNAME/SCPSLTemplateGenerator/releases
+# Télécharger le .nupkg depuis https://github.com/thefrenchydev/SCPSLTemplateGenerator/releases
 dotnet tool install --global --add-source ./chemin/vers/nupkg SCPSLTemplateGenerator
 ```
 
 **Option 2 : Installer directement depuis GitHub (avec URL complète)**
 ```bash
-dotnet tool install --global --add-source https://github.com/TON-USERNAME/SCPSLTemplateGenerator/releases/download/v1.0.0 SCPSLTemplateGenerator
+dotnet tool install --global --add-source https://github.com/thefrenchydev/SCPSLTemplateGenerator/releases/download/v1.0.0 SCPSLTemplateGenerator
 ```
 
 ## Mettre à jour le .csproj avec la vraie URL
@@ -111,8 +111,8 @@ dotnet tool install --global --add-source https://github.com/TON-USERNAME/SCPSLT
 Une fois le repo créé, mets à jour [SCPSLTemplateGenerator.csproj](SCPSLTemplateGenerator.csproj) :
 
 ```xml
-<PackageProjectUrl>https://github.com/TON-USERNAME/SCPSLTemplateGenerator</PackageProjectUrl>
-<RepositoryUrl>https://github.com/TON-USERNAME/SCPSLTemplateGenerator</RepositoryUrl>
+<PackageProjectUrl>https://github.com/thefrenchydev/SCPSLTemplateGenerator</PackageProjectUrl>
+<RepositoryUrl>https://github.com/thefrenchydev/SCPSLTemplateGenerator</RepositoryUrl>
 ```
 
 Puis rebuild et republish :
@@ -138,9 +138,9 @@ Si tu veux un vrai feed NuGet hébergé sur GitHub :
 # Générer un Personal Access Token sur github.com (Settings → Developer settings → PAT)
 # Avec scope 'write:packages'
 
-dotnet nuget add source https://nuget.pkg.github.com/TON-USERNAME/index.json `
+dotnet nuget add source https://nuget.pkg.github.com/thefrenchydev/index.json `
     --name github `
-    --username TON-USERNAME `
+    --username thefrenchydev `
     --password TON-GITHUB-PAT `
     --store-password-in-clear-text
 
@@ -151,8 +151,8 @@ dotnet nuget push .\nupkg\SCPSLTemplateGenerator.1.0.0.nupkg `
 
 Les utilisateurs devront alors configurer le feed :
 ```bash
-dotnet nuget add source https://nuget.pkg.github.com/TON-USERNAME/index.json --name github-TON-USERNAME
-dotnet tool install --global SCPSLTemplateGenerator --add-source github-TON-USERNAME
+dotnet nuget add source https://nuget.pkg.github.com/thefrenchydev/index.json --name github-thefrenchydev
+dotnet tool install --global SCPSLTemplateGenerator --add-source github-thefrenchydev
 ```
 
 ## Recommandation finale
