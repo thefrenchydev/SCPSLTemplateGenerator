@@ -45,11 +45,11 @@ function Convert-ToTemplate {
     return $Content
 }
 
-# Nettoyer le dossier templates (sauf le fichier .gitignore et LICENSE s'ils existent dans templates)
+# Nettoyer le dossier templates (sauf LICENSE s'il existe dans templates)
 Write-Host "  [*] Cleaning templates directory..." -ForegroundColor Gray
 if (Test-Path $templateDir) {
     Get-ChildItem -Path $templateDir -Recurse | Where-Object { 
-        $_.Name -notlike "*.gitignore" -and $_.Name -ne "LICENSE" 
+        $_.Name -ne "LICENSE" 
     } | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
 }
 
@@ -95,8 +95,12 @@ Get-ChildItem -Path $srcDir -Recurse -File | ForEach-Object {
     elseif ($file.Extension -eq ".cs") {
         $destPath += ".template"
     }
-    # Garder LICENSE et .gitignore tels quels (pas de .template)
-    elseif ($file.Name -eq "LICENSE" -or $file.Name -eq ".gitignore") {
+    # Renommer .gitignore en gitignore.template
+    elseif ($file.Name -eq ".gitignore") {
+        $destPath = Join-Path (Split-Path $destPath -Parent) "gitignore.template"
+    }
+    # Garder LICENSE tel quel (pas de .template)
+    elseif ($file.Name -eq "LICENSE") {
         # Pas de modification du nom
     }
     

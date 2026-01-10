@@ -328,6 +328,11 @@ public class TemplateGenerator
             {
                 outputPath = "{{PluginName}}.sln";
             }
+            else if (relativePath == "gitignore.template")
+            {
+                // Renommer gitignore.template en .gitignore dans la sortie
+                outputPath = ".gitignore";
+            }
             else if (relativePath.EndsWith(".cs.template"))
             {
                 // Retirer le .template des fichiers .cs
@@ -339,7 +344,7 @@ public class TemplateGenerator
                     outputPath = outputPath.Replace("Command.cs", "ExampleCommand.cs");
                 }
             }
-            // LICENSE et .gitignore restent tels quels
+            // LICENSE et autres fichiers restent tels quels
             
             templates[relativePath] = outputPath;
         }

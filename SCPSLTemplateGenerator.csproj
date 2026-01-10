@@ -26,6 +26,7 @@
     <PackageReleaseNotes>Initial release with automatic dependency management and FasterAPI integration.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>Copyright (c) 2026 TheFrenchyDev</Copyright>
+    <NoWarn>NU5119</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="templates\**\*" Exclude="templates\.gitignore">
+    <None Include="templates\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="dependencies\**\*">
