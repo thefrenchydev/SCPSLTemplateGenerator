@@ -10,8 +10,8 @@ public class TemplateGenerator
     {
         try
         {
-            // Vérification de la variable d'environnement LABAPI_REFERENCES
-            var envCheckResult = await CheckAndSetupLabApiReferencesAsync();
+            // Vérification de la variable d'environnement SL_REFERENCES
+            var envCheckResult = await CheckAndSetupSlReferencesAsync();
             if (!envCheckResult.IsValid)
             {
                 return GenerationResult.Failure(envCheckResult.ErrorMessage ?? "Unknown error");
@@ -111,7 +111,7 @@ public class TemplateGenerator
             var fileName = Path.GetFileName(dllPath);
             
             references.AppendLine($"    <Reference Include=\"{dllName}\">");
-            references.AppendLine($"      <HintPath>$(LABAPI_REFERENCES)\\{fileName}</HintPath>");
+            references.AppendLine($"      <HintPath>$(SL_REFERENCES)\\{fileName}</HintPath>");
             references.AppendLine("      <Private>false</Private>");
             references.Append("    </Reference>");
             
@@ -154,40 +154,40 @@ public class TemplateGenerator
         }
     }
 
-    private Task<ValidationResult> CheckAndSetupLabApiReferencesAsync()
+    private Task<ValidationResult> CheckAndSetupSlReferencesAsync()
     {
-        var labApiReferences = Environment.GetEnvironmentVariable("LABAPI_REFERENCES", EnvironmentVariableTarget.User);
+        var slReferences = Environment.GetEnvironmentVariable("SL_REFERENCES", EnvironmentVariableTarget.User);
         
-        if (!string.IsNullOrEmpty(labApiReferences))
+        if (!string.IsNullOrEmpty(slReferences))
         {
-            if (Directory.Exists(labApiReferences))
+            if (Directory.Exists(slReferences))
             {
-                ConsoleHelper.WriteInfo($"[INFO] Using LABAPI_REFERENCES: {labApiReferences}");
+                ConsoleHelper.WriteInfo($"[INFO] Using SL_REFERENCES: {slReferences}");
                 return Task.FromResult(ValidationResult.Valid());
             }
             else
             {
-                ConsoleHelper.WriteError($"[ERROR] LABAPI_REFERENCES points to non-existent directory: {labApiReferences}");
-                return Task.FromResult(ValidationResult.Invalid($"LABAPI_REFERENCES directory does not exist: {labApiReferences}"));
+                ConsoleHelper.WriteError($"[ERROR] SL_REFERENCES points to non-existent directory: {slReferences}");
+                return Task.FromResult(ValidationResult.Invalid($"SL_REFERENCES directory does not exist: {slReferences}"));
             }
         }
 
         // La variable n'existe pas, proposer de la créer
-        ConsoleHelper.WriteInfo("[INFO] LABAPI_REFERENCES environment variable not found.");
+        ConsoleHelper.WriteInfo("[INFO] SL_REFERENCES environment variable not found.");
         Console.WriteLine();
-        Console.WriteLine("The LABAPI_REFERENCES variable is required to store SCP:SL dependencies.");
+        Console.WriteLine("The SL_REFERENCES variable is required to store SCP:SL dependencies.");
         Console.Write("Would you like to create it now? (Y/n): ");
         
         var response = Console.ReadLine()?.Trim().ToLower();
         if (response != "" && response != "y" && response != "yes")
         {
-            return Task.FromResult(ValidationResult.Invalid("LABAPI_REFERENCES environment variable is required."));
+            return Task.FromResult(ValidationResult.Invalid("SL_REFERENCES environment variable is required."));
         }
 
         // Demander le chemin
         Console.WriteLine();
-        var defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".labapi", "references");
-        Console.WriteLine($"Enter the path for LABAPI_REFERENCES (default: {defaultPath}):");
+        var defaultPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".scpsl", "references");
+        Console.WriteLine($"Enter the path for SL_REFERENCES (default: {defaultPath}):");
         Console.Write("Path: ");
         
         var userPath = Console.ReadLine()?.Trim();
@@ -205,7 +205,7 @@ public class TemplateGenerator
             
             if (Directory.Exists(dependenciesSourceDir))
             {
-                ConsoleHelper.WriteInfo("[INFO] Copying dependencies to LABAPI_REFERENCES...");
+                ConsoleHelper.WriteInfo("[INFO] Copying dependencies to SL_REFERENCES...");
                 var files = Directory.GetFiles(dependenciesSourceDir, "*.dll", SearchOption.AllDirectories);
                 
                 foreach (var sourceFile in files)
@@ -219,8 +219,8 @@ public class TemplateGenerator
             }
 
             // Définir la variable d'environnement
-            Environment.SetEnvironmentVariable("LABAPI_REFERENCES", targetPath, EnvironmentVariableTarget.User);
-            ConsoleHelper.WriteSuccess($"[SUCCESS] LABAPI_REFERENCES set to: {targetPath}");
+            Environment.SetEnvironmentVariable("SL_REFERENCES", targetPath, EnvironmentVariableTarget.User);
+            ConsoleHelper.WriteSuccess($"[SUCCESS] SL_REFERENCES set to: {targetPath}");
             Console.WriteLine();
             ConsoleHelper.WriteInfo("[INFO] Please restart your terminal for the changes to take effect.");
             Console.WriteLine();
@@ -229,7 +229,7 @@ public class TemplateGenerator
         }
         catch (Exception ex)
         {
-            return Task.FromResult(ValidationResult.Invalid($"Failed to setup LABAPI_REFERENCES: {ex.Message}"));
+            return Task.FromResult(ValidationResult.Invalid($"Failed to setup SL_REFERENCES: {ex.Message}"));
         }
     }
 

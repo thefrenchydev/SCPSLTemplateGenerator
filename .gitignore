@@ -14,7 +14,7 @@ nupkg/
 .DS_Store
 Thumbs.db
 
-## Dependencies (copied from LABAPI_REFERENCES)
+## Dependencies (copied from SL_REFERENCES)
 dependencies/*.dll
 
 ## Temp files

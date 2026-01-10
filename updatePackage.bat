@@ -1,7 +1,7 @@
 @echo off
-echo [INFO] Copying dependencies from LABAPI_REFERENCES...
-if not defined LABAPI_REFERENCES (
-    echo [ERROR] LABAPI_REFERENCES environment variable is not set!
+echo [INFO] Copying dependencies from SL_REFERENCES...
+if not defined SL_REFERENCES (
+    echo [ERROR] SL_REFERENCES environment variable is not set!
     exit /b 1
 )
 

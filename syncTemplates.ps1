@@ -27,8 +27,8 @@ function Convert-ToTemplate {
     
     # Pour les fichiers .csproj, remplacer les références par le placeholder
     if ($FileName -like "*.csproj") {
-        $pattern = '(?s)  <!-- Références automatiques depuis LABAPI_REFERENCES -->.*?  </ItemGroup>'
-        $Content = $Content -replace $pattern, "  <!-- Références automatiques depuis LABAPI_REFERENCES -->`r`n  <ItemGroup>`r`n{{DependencyReferences}}`r`n  </ItemGroup>"
+        $pattern = '(?s)  <!-- Références automatiques depuis SL_REFERENCES -->.*?  </ItemGroup>'
+        $Content = $Content -replace $pattern, "  <!-- Références automatiques depuis SL_REFERENCES -->`r`n  <ItemGroup>`r`n{{DependencyReferences}}`r`n  </ItemGroup>"
     }
     
     # Pour les fichiers .sln, gérer les GUIDs et noms de projets

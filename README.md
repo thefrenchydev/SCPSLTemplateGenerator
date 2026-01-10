@@ -4,7 +4,7 @@ A .NET CLI tool for quickly generating SCP:SL LabAPI plugin templates with autom
 
 ## Features
 ✨ **Quick Plugin Generation** - Create a complete plugin structure with one command  
-🔧 **Automatic Dependencies** - Integrated dependency management via `LABAPI_REFERENCES`  
+🔧 **Automatic Dependencies** - Integrated dependency management via `SL_REFERENCES`  
 📦 **LabAPI Integration** - Pre-configured with Northwood.LabAPI and CustomEventHandler  
 🎯 **Customizable** - Plugin name, author, description, and version  
 📁 **Complete Structure** - Includes example commands, events, and config files
@@ -46,10 +46,10 @@ MyPlugin/
 
 ## Requirements
 - .NET 8.0 SDK or later
-- Environment variable `LABAPI_REFERENCES` pointing to your SCP:SL dependencies folder
+- Environment variable `SL_REFERENCES` pointing to your SCP:SL dependencies folder
 
 ## Environment Setup
-On first use, the tool will help you set up the `LABAPI_REFERENCES` environment variable, which should point to a folder containing your SCP:SL game dependencies (Assembly-CSharp.dll, UnityEngine.dll, etc.).
+On first use, the tool will help you set up the `SL_REFERENCES` environment variable, which should point to a folder containing your SCP:SL game dependencies (Assembly-CSharp.dll, UnityEngine.dll, etc.).
 
 ## Building from Source
 ```bash
