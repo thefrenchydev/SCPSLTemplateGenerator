@@ -40,6 +40,9 @@ public class TemplateGenerator
             // Génération des fichiers
             await GenerateFilesAsync(variables, outputDir);
 
+            // Synchroniser les dépendances manquantes vers SL_REFERENCES
+            await SyncMissingDependenciesAsync();
+
             return GenerationResult.Success(outputDir);
         }
         catch (Exception ex)
@@ -154,6 +157,46 @@ public class TemplateGenerator
         }
     }
 
+    private async Task SyncMissingDependenciesAsync()
+    {
+        var slReferences = Environment.GetEnvironmentVariable("SL_REFERENCES", EnvironmentVariableTarget.User);
+        if (string.IsNullOrEmpty(slReferences) || !Directory.Exists(slReferences))
+        {
+            return; // SL_REFERENCES not configured
+        }
+
+        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
+        var assemblyDir = Path.GetDirectoryName(assemblyLocation)!;
+        var dependenciesSourceDir = Path.Combine(assemblyDir, "dependencies");
+
+        if (!Directory.Exists(dependenciesSourceDir))
+        {
+            return; // No dependencies folder in tool
+        }
+
+        // Obtenir tous les DLL du dossier dependencies de l'outil
+        var sourceDlls = Directory.GetFiles(dependenciesSourceDir, "*.dll", SearchOption.AllDirectories);
+        var copiedCount = 0;
+
+        foreach (var sourceDll in sourceDlls)
+        {
+            var fileName = Path.GetFileName(sourceDll);
+            var targetDll = Path.Combine(slReferences, fileName);
+
+            // Copier seulement si le fichier n'existe pas dans SL_REFERENCES
+            if (!File.Exists(targetDll))
+            {
+                File.Copy(sourceDll, targetDll, overwrite: false);
+                copiedCount++;
+            }
+        }
+
+        if (copiedCount > 0)
+        {
+            ConsoleHelper.WriteSuccess($"[SUCCESS] Synced {copiedCount} missing dependencies to SL_REFERENCES");
+        }
+    }
+
     private Task<ValidationResult> CheckAndSetupSlReferencesAsync()
     {
         var slReferences = Environment.GetEnvironmentVariable("SL_REFERENCES", EnvironmentVariableTarget.User);
@@ -169,6 +212,34 @@ public class TemplateGenerator
             {
                 ConsoleHelper.WriteError($"[ERROR] SL_REFERENCES points to non-existent directory: {slReferences}");
                 return Task.FromResult(ValidationResult.Invalid($"SL_REFERENCES directory does not exist: {slReferences}"));
+            }
+        }
+
+        // Vérifier si l'ancienne variable LABAPI_REFERENCES existe
+        var oldLabApiReferences = Environment.GetEnvironmentVariable("LABAPI_REFERENCES", EnvironmentVariableTarget.User);
+        if (!string.IsNullOrEmpty(oldLabApiReferences))
+        {
+            ConsoleHelper.WriteInfo("[INFO] Found existing LABAPI_REFERENCES variable.");
+            Console.WriteLine($"Migrating LABAPI_REFERENCES to SL_REFERENCES...");
+            Console.WriteLine($"Path: {oldLabApiReferences}");
+            
+            if (Directory.Exists(oldLabApiReferences))
+            {
+                // Renommer la variable
+                Environment.SetEnvironmentVariable("SL_REFERENCES", oldLabApiReferences, EnvironmentVariableTarget.User);
+                Environment.SetEnvironmentVariable("LABAPI_REFERENCES", null, EnvironmentVariableTarget.User);
+                
+                ConsoleHelper.WriteSuccess($"[SUCCESS] Migrated LABAPI_REFERENCES to SL_REFERENCES: {oldLabApiReferences}");
+                Console.WriteLine();
+                ConsoleHelper.WriteInfo("[INFO] Please restart your terminal for the changes to take effect.");
+                Console.WriteLine();
+                
+                return Task.FromResult(ValidationResult.Valid());
+            }
+            else
+            {
+                ConsoleHelper.WriteError($"[ERROR] LABAPI_REFERENCES points to non-existent directory: {oldLabApiReferences}");
+                ConsoleHelper.WriteInfo("[INFO] Will create new SL_REFERENCES instead.");
             }
         }
 
