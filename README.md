@@ -2,6 +2,12 @@
 
 A .NET CLI tool for quickly generating SCP:SL LabAPI plugin templates with automatic dependency management.
 
+<p align="center">
+    <a href="https://github.com/thefrenchydev/SCPSLTemplateGenerator">![Github](https://img.shields.io/badge/github-repo-blue?logo=github)</a>
+    <a href="https://www.nuget.org/packages/SCPSLTemplateGenerator">![NuGet](https://img.shields.io/nuget/v/SCPSLTemplateGenerator.svg?logo=nuget)</a>
+    <a href="https://dotnet.microsoft.com/download/dotnet/8.0">![.NET](https://img.shields.io/badge/.NET-8.0-blue?logo=dotnet)</a>
+</p>
+
 ## Features
 ✨ **Quick Plugin Generation** - Create a complete plugin structure with one command  
 🔧 **Automatic Dependencies** - Integrated dependency management via `SL_REFERENCES`  
@@ -50,6 +56,8 @@ MyPlugin/
 
 ## Environment Setup
 On first use, the tool will help you set up the `SL_REFERENCES` environment variable, which should point to a folder containing your SCP:SL game dependencies (Assembly-CSharp.dll, UnityEngine.dll, etc.).
+
+In case you have missing dependencies, the tool will add them for you.
 
 ## Building from Source
 ```bash
