@@ -21,7 +21,7 @@ function Convert-ToTemplate {
     $Content = $Content -replace '"TheFrenchyDev"', '"{{Author}}"'
     $Content = $Content -replace '"This is a template plugin"', '"{{Description}}"'
     $Content = $Content -replace 'new\(1, 1, 0\)', 'new({{Version}})'
-    $Content = $Content -replace 'EventHandler\.GetEvents\("Template\.Events"\)', 'EventHandler.GetEvents("{{Namespace}}.Events")'
+    $Content = $Content -replace 'EventsContainer\.GetEvents\("Template.Events"\)', 'EventsContainer.GetEvents("{{Namespace}}.Events")'
     $Content = $Content -replace '<RootNamespace>Template</RootNamespace>', '<RootNamespace>{{Namespace}}</RootNamespace>'
     $Content = $Content -replace '<AssemblyName>Template</AssemblyName>', '<AssemblyName>{{PluginName}}</AssemblyName>'
     

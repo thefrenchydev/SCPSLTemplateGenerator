@@ -15,7 +15,7 @@ public class Plugin : LabApi.Loader.Features.Plugins.Plugin<Config>
     public override Version Version => new({{Version}});
     public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
     public override LoadPriority Priority => LoadPriority.High;
-    private IEventList Events => EventsContainer.GetEvents("Template.Events");
+    private IEventList Events => EventsContainer.GetEvents("{{Namespace}}.Events");
 
     public override void Enable()
     {
