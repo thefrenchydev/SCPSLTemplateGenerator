@@ -6,13 +6,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latest</LangVersion>
-    
-    <!-- Configuration pour .NET Tool -->
+
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>scpsl-template</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
-    
-    <!-- Métadonnées du package -->
+
     <PackageId>SCPSLTemplateGenerator</PackageId>
     <Version>1.0.0</Version>
     <Authors>TheFrenchyDev</Authors>
@@ -34,14 +32,12 @@
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
   </ItemGroup>
 
-  <!-- Exclure le dossier src de la compilation -->
   <ItemGroup>
     <Compile Remove="src\**\*" />
     <EmbeddedResource Remove="src\**\*" />
     <None Remove="src\**\*" />
   </ItemGroup>
 
-  <!-- Inclure les templates et dépendances aux côtés de l'exécutable de l'outil -->
   <ItemGroup>
     <None Include="templates\**\*" Exclude="templates\.gitignore">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
