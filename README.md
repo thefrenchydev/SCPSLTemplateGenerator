@@ -3,9 +3,9 @@
 A .NET CLI tool for quickly generating SCP:SL LabAPI plugin templates with automatic dependency management.
 
 <p align="center">
-    <a href="https://github.com/thefrenchydev/SCPSLTemplateGenerator">![Github](https://img.shields.io/badge/github-repo-blue?logo=github)</a>
-    <a href="https://www.nuget.org/packages/SCPSLTemplateGenerator">![NuGet](https://img.shields.io/nuget/v/SCPSLTemplateGenerator.svg?logo=nuget)</a>
-    <a href="https://dotnet.microsoft.com/download/dotnet/8.0">![.NET](https://img.shields.io/badge/.NET-8.0-blue?logo=dotnet)</a>
+    <a href="https://github.com/thefrenchydev/SCPSLTemplateGenerator"><img src="https://img.shields.io/badge/github-repo-blue?logo=github" alt="Github"></a>
+    <a href="https://www.nuget.org/packages/SCPSLTemplateGenerator"><img src="https://img.shields.io/nuget/v/SCPSLTemplateGenerator.svg?logo=nuget" alt="NuGet"></a>
+    <a href="https://dotnet.microsoft.com/download/dotnet/8.0"><img src="https://img.shields.io/badge/.NET-8.0-blue?logo=dotnet" alt=".NET"></a>
 </p>
 
 ## Features
