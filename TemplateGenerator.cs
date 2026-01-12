@@ -157,12 +157,12 @@ public class TemplateGenerator
         }
     }
 
-    private async Task SyncMissingDependenciesAsync()
+    private static Task SyncMissingDependenciesAsync()
     {
         var slReferences = Environment.GetEnvironmentVariable("SL_REFERENCES", EnvironmentVariableTarget.User);
         if (string.IsNullOrEmpty(slReferences) || !Directory.Exists(slReferences))
         {
-            return; // SL_REFERENCES not configured
+            return Task.CompletedTask; // SL_REFERENCES not configured
         }
 
         var assemblyLocation = Assembly.GetExecutingAssembly().Location;
@@ -171,7 +171,7 @@ public class TemplateGenerator
 
         if (!Directory.Exists(dependenciesSourceDir))
         {
-            return; // No dependencies folder in tool
+            return Task.CompletedTask; // No dependencies folder in tool
         }
 
         // Obtenir tous les DLL du dossier dependencies de l'outil
@@ -195,6 +195,8 @@ public class TemplateGenerator
         {
             ConsoleHelper.WriteSuccess($"[SUCCESS] Synced {copiedCount} missing dependencies to SL_REFERENCES");
         }
+
+        return Task.CompletedTask;
     }
 
     private Task<ValidationResult> CheckAndSetupSlReferencesAsync()
