@@ -12,7 +12,7 @@
     <PackageOutputPath>./nupkg</PackageOutputPath>
 
     <PackageId>SCPSLTemplateGenerator</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>TheFrenchyDev</Authors>
     <Company>TheFrenchyDev</Company>
     <Product>SCPSL Template Generator</Product>
@@ -23,11 +23,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>scp-sl;scpsl;labapi;plugin;template;cli;dotnet-tool;game-development;scp;secret-laboratory</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>- The template generator will now add missing dependencies in the references folder for you when creating a new plugin
-- The .gitignore is now included in the template
-- Renamed env variable LABAPI_REFERENCES to SL_REFERENCES and allowed the template generator to detect and rename the old env variable.
-- When you build the project, the dll will be automatically copied into the dedicated server plugins folder.
-- Got rid of app.config file as it's deprecated.</PackageReleaseNotes>
+    <PackageReleaseNotes>- When you build the project, the dll will be automatically copied into the dedicated server plugins folder.
+- Got rid of app.config file as it's deprecated.
+- Fixed Template text not being replaced with the namespace in the EventsContainer.GetEvents() method call.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>Copyright (c) 2026 TheFrenchyDev</Copyright>
     <NoWarn>NU5119</NoWarn>
