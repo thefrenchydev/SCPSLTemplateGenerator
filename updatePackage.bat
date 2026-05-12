@@ -7,13 +7,6 @@ if not defined SL_REFERENCES (
 
 if not exist "dependencies" mkdir dependencies
 
-echo [INFO] Syncing templates from src folder...
-powershell -ExecutionPolicy Bypass -File syncTemplates.ps1
-if errorlevel 1 (
-    echo [ERROR] Template sync failed!
-    exit /b 1
-)
-
 echo [INFO] Building project...
 dotnet build -c Release
 echo [INFO] Cleaning old packages...

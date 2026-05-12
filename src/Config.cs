@@ -3,9 +3,9 @@ namespace Template;
 public class Config
 {
     public bool Debug { get; set; }
-    #if DEBUG
+#if DEBUG
      = true;
-    #else
+#else
      = false;
-    #endif
+#endif
 }

@@ -1,10 +1,11 @@
 ﻿namespace Template;
 
 using System;
+using LabApi.Events.CustomHandlers;
 using LabApi.Features;
 using LabApi.Features.Console;
 using LabApi.Loader.Features.Plugins.Enums;
-using CustomEventHandler.Events;
+using Template.Events;
 
 public class Plugin : LabApi.Loader.Features.Plugins.Plugin<Config>
 {
@@ -12,10 +13,10 @@ public class Plugin : LabApi.Loader.Features.Plugins.Plugin<Config>
     public override string Name => "Template";
     public override string Author => "TheFrenchyDev";
     public override string Description => "This is a template plugin";
-    public override Version Version => new(1, 1, 0);
+    public override Version Version => new(1, 0, 0);
     public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
     public override LoadPriority Priority => LoadPriority.High;
-    private IEventList Events => EventsContainer.GetEvents("Template.Events");
+    private EventsHandler Events { get; } = new();
 
     public override void Enable()
     {
@@ -26,12 +27,12 @@ public class Plugin : LabApi.Loader.Features.Plugins.Plugin<Config>
             Logger.Debug("Debug mode enabled.");
             
         Instance = this;
-        Events.RegisterEvents();
+        CustomHandlersManager.RegisterEventsHandler(Events);
     }
 
     public override void Disable()
     {
         Instance = null!;
-        Events.UnregisterEvents();
+        CustomHandlersManager.UnregisterEventsHandler(Events);
     }
 }

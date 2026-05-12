@@ -1,10 +1,11 @@
 namespace {{Namespace}};
 
 using System;
+using LabApi.Events.CustomHandlers;
 using LabApi.Features;
 using LabApi.Features.Console;
 using LabApi.Loader.Features.Plugins.Enums;
-using CustomEventHandler.Events;
+using {{Namespace}}.Events;
 
 public class Plugin : LabApi.Loader.Features.Plugins.Plugin<Config>
 {
@@ -12,10 +13,10 @@ public class Plugin : LabApi.Loader.Features.Plugins.Plugin<Config>
     public override string Name => "{{PluginName}}";
     public override string Author => "{{Author}}";
     public override string Description => "{{Description}}";
-    public override Version Version => new({{Version}});
+    public override Version Version => new(1, 0, 0);
     public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
     public override LoadPriority Priority => LoadPriority.High;
-    private IEventList Events => EventsContainer.GetEvents("{{Namespace}}.Events");
+    private EventsHandler Events { get; } = new();
 
     public override void Enable()
     {
@@ -26,12 +27,12 @@ public class Plugin : LabApi.Loader.Features.Plugins.Plugin<Config>
             Logger.Debug("Debug mode enabled.");
             
         Instance = this;
-        Events.RegisterEvents();
+        CustomHandlersManager.RegisterEventsHandler(Events);
     }
 
     public override void Disable()
     {
         Instance = null!;
-        Events.UnregisterEvents();
+        CustomHandlersManager.UnregisterEventsHandler(Events);
     }
 }

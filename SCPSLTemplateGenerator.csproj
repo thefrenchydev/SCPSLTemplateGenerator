@@ -12,7 +12,7 @@
     <PackageOutputPath>./nupkg</PackageOutputPath>
 
     <PackageId>SCPSLTemplateGenerator</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>TheFrenchyDev</Authors>
     <Company>TheFrenchyDev</Company>
     <Product>SCPSL Template Generator</Product>
@@ -23,9 +23,10 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>scp-sl;scpsl;labapi;plugin;template;cli;dotnet-tool;game-development;scp;secret-laboratory</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageReleaseNotes>- When you build the project, the dll will be automatically copied into the dedicated server plugins folder.
-- Got rid of app.config file as it's deprecated.
-- Fixed Template text not being replaced with the namespace in the EventsContainer.GetEvents() method call.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Replaced CustomEventsHandler plugin with built-in Labapi CustomEventsHandler.
+- Updated LabAPI package dependency to latest version.
+- Removed bin and Release folders from .gitignore to allow distribution of compiled plugins for easier usage.
+    </PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>Copyright (c) 2026 TheFrenchyDev</Copyright>
     <NoWarn>NU5119</NoWarn>
