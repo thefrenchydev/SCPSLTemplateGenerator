@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Northwood.LabAPI" Version="latest" />
+    <PackageReference Include="Northwood.LabAPI" Version="1.1.6.1" />
   </ItemGroup>
 
   <!-- Force highest versions to resolve RAR conflicts -->
